@@ -2,7 +2,7 @@
 
 Heya! I'm an errorist, weeaboo, technologist & ThoughtWorker.
 
-During my daily adventures in softwareland I end up with some thoughts or discussions that seem worth sharing, I'll try to record them here and broadcast on [my twitter account](https://twitter.com/Caligin35).
+During my daily adventures in softwareland I end up with some thoughts or discussions that seem worth sharing, I'll try to record them here and broadcast on [my Mastodon account](https://octodon.social/@caligin) (and on [birdsite](https://twitter.com/Caligin35) too).
 
 Hope that you'll find it useful!
 
