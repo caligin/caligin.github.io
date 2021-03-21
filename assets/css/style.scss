@@ -6,3 +6,18 @@
 p > code {
   color: #90a959;
 }
+header h2 {
+  display: inline;
+  margin-right: 2rem;
+}
+
+a {
+  color: #c9e3c5;
+  text-shadow: none;
+}
+
+a:hover {
+  color: #a0f79d;
+  text-shadow: 0 0 5px rgba(56, 247, 50, 0.5);
+  transition: 300ms linear;
+}
