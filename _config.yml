@@ -2,5 +2,9 @@ theme: jekyll-theme-hacker
 title: foo.anima.tech
 description: Foo's journal of technology
 baseurl: ""
-url: ""
 repository: caligin/caligin.github.io
+url: https://foo.anima.tech
+plugins:
+  - jekyll-feed
+  - jekyll-sitemap
+  - jekyll-seo-tag
