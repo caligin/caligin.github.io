@@ -5,9 +5,18 @@ layout: post
 tags: [AWS, "Security Engineering", Terraform, IAM, 🐇🕳️] 
 ---
 
+
+<div class="note warning">
+  <h5>Edit June 2021: dated approach</h5>
+  <p>
+    While I hope you find value in following along the thinking process in this story, I would no longer recommend the approach outlined in this post and suggest adopting <a href="https://aws.amazon.com/single-sign-on/">AWS SSO</a> instead.
+    I plan to cover it in a new post in the near future.
+  </p>
+</div>
+
 ### _Or: "How to Jump in Endless Rabbit Holes and Survive to Tell the Story 🐇🕳️"._
 
-It just happened. Don’t ask me why, I don’t really know either. But woke up one morning and decided to prepare for the [AWS Security Specialism](https://aws.amazon.com/certification/certified-security-specialty/) certification. Three hours later I had purchased an online course subscription, set a whole bunch of dodgy domains to “trusted” in [NoScript(https://noscript.net/) to be able to play videos, and of course I need an AWS playground to tinker along. Before using the account(s) I needed to lay  some groundwork , on top of my head that  looked like:
+It just happened. Don’t ask me why, I don’t really know either. But woke up one morning and decided to prepare for the [AWS Security Specialism](https://aws.amazon.com/certification/certified-security-specialty/) certification. Three hours later I had purchased an online course subscription, set a whole bunch of dodgy domains to “trusted” in [NoScript](https://noscript.net/) to be able to play videos, and of course I need an AWS playground to tinker along. Before using the account(s) I needed to lay  some groundwork , on top of my head that  looked like:
 
 - "owners" IAM users for humans
   - MFA enforced

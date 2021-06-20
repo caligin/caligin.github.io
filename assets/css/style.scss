@@ -21,3 +21,29 @@ a:hover {
   text-shadow: 0 0 5px rgba(56, 247, 50, 0.5);
   transition: 300ms linear;
 }
+
+.note {
+  border: 1px solid #414841;
+  border-radius: .5rem;
+  background-image: linear-gradient(to bottom, #616660 0%, #292d29 100%);
+  margin: .75rem 0;
+  padding: .5rem;
+  padding-left: 2rem;
+}
+.note h5 {
+  font-weight: bold;
+}
+.note h5:before {
+  content: "💬";
+  margin-right: 1rem;
+}
+.note p {
+  font-style: italic;
+}
+.note.warning {
+  border: 1px solid rgb(74, 73, 65);
+  background-image: linear-gradient(rgb(104, 96, 66) 0%, rgb(43, 42, 38) 100%);
+}
+.note.warning h5:before {
+  content: "⚠️";
+}
