@@ -2,7 +2,8 @@
 title: "Building a Magic: the Gathering server (ft. Kubernetes security)"
 author: Foo
 layout: post
-tags: [k8s, "Security Engineering"] 
+tags: [k8s, "Security Engineering"]
+ocb: '{{'
 ---
 
 I know, at first "building a MTG server" doesn't sound very _security_, does it? Nor it would sound very _engineering_, but stick with me for a sec, ok?
@@ -347,7 +348,7 @@ jobs:
     - name: Install doctl
       uses: digitalocean/action-doctl@v2
       with:
-        token: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
+        token: ${{page.ocb}} secrets.DIGITALOCEAN_ACCESS_TOKEN }}
     - name: login to registry
       id: do-registry
       run: "echo \"::set-output name=password::$(doctl registry docker-config --read-write --expiry-seconds 3600 | jq -r '.auths[\"registry.digitalocean.com\"].auth' | base64 -d | cut -d: -f 1)\""
@@ -357,8 +358,8 @@ jobs:
       uses: docker/login-action@v1
       with:
         registry: registry.digitalocean.com
-        username: ${{ steps.do-registry.outputs.password }}
-        password: ${{ steps.do-registry.outputs.password }}
+        username: ${{page.ocb}} steps.do-registry.outputs.password }}
+        password: ${{page.ocb}} steps.do-registry.outputs.password }}
     - name: Generate meta
       id: meta
       run: |
@@ -372,12 +373,12 @@ jobs:
       with:
         context: .
         file: ./Dockerfile
-        tags: ${{ steps.meta.outputs.tags }}
+        tags: ${{page.ocb}} steps.meta.outputs.tags }}
         push: true
         labels: |
-          org.opencontainers.image.source=${{ github.event.repository.clone_url }}
-          org.opencontainers.image.created=${{ steps.meta.outputs.created }}
-          org.opencontainers.image.revision=${{ github.sha }}
+          org.opencontainers.image.source=${{page.ocb}} github.event.repository.clone_url }}
+          org.opencontainers.image.created=${{page.ocb}} steps.meta.outputs.created }}
+          org.opencontainers.image.revision=${{page.ocb}} github.sha }}
 
 ```
 
@@ -481,7 +482,7 @@ kubectl --kubeconfig ${tmp_kubeconfig} config view --raw | base64 -w0
 
 ```
 
-The output is a big base64 encoded blob that we can copypaste right into a GitHub Actions Secret called `KUBE_CONFIG`. Now that we have this in place, the plan is reasonably simple: extend our GHA workflow to create a k8s `Deployment`, wait for its rollout and rollback if it fails. All of this in a separate job from the build steps at least - otherwise a build failure risks to trigger a rollback (at least, the way I'm doing it on fail with a `if: ${{ failure() }}` condition, which is job-scoped). 
+The output is a big base64 encoded blob that we can copypaste right into a GitHub Actions Secret called `KUBE_CONFIG`. Now that we have this in place, the plan is reasonably simple: extend our GHA workflow to create a k8s `Deployment`, wait for its rollout and rollback if it fails. All of this in a separate job from the build steps at least - otherwise a build failure risks to trigger a rollback (at least, the way I'm doing it on fail with a `if: ${{page.ocb}} failure() }}` condition, which is job-scoped). 
 
 ```yml
   deploy:
@@ -495,18 +496,18 @@ The output is a big base64 encoded blob that we can copypaste right into a GitHu
     - uses: danielr1996/kubectl-action@1.0.0
       name: Deploy
       with:
-        kubeconfig: ${{ secrets.KUBE_CONFIG }}
+        kubeconfig: ${{page.ocb}} secrets.KUBE_CONFIG }}
         args: apply -f deployment.yml
     - uses: danielr1996/kubectl-action@1.0.0
       name: wait for rollout
       with:
-        kubeconfig: ${{ secrets.KUBE_CONFIG }}
+        kubeconfig: ${{page.ocb}} secrets.KUBE_CONFIG }}
         args: rollout status deployment/servatrice --timeout 60s
     - name: Rollback on failed acceptance
-      if: ${{ failure() }}
+      if: ${{page.ocb}} failure() }}
       uses: danielr1996/kubectl-action@1.0.0
       with:
-        kubeconfig: ${{ secrets.KUBE_CONFIG }}
+        kubeconfig: ${{page.ocb}} secrets.KUBE_CONFIG }}
         args: rollout undo deployment/servatrice
 
 ```
